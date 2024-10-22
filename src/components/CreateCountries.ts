@@ -8,7 +8,7 @@ const CreateCountries = (
 ): HTMLDivElement => {
   const countryElement = <HTMLDivElement>document.createElement('div');
   countryElement.classList.add('country');
-  countryElement.setAttribute('country-index', `${index}`);
+  countryElement.setAttribute('data-country-index', `${index}`);
 
   countryElement.innerHTML = `
         <img src=${flagUrl} alt="Flag of ${name}" class="home-country-flag">
@@ -19,6 +19,10 @@ const CreateCountries = (
             <h4>Capital: <span class="home-country-capital">${capital}</span></h4>
         </div>
     `;
+
+  setTimeout(() => {
+    countryElement.classList.add('fade-animation');
+  }, index * 70);
 
   return countryElement;
 };
