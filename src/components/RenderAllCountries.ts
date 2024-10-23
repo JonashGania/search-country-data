@@ -1,4 +1,5 @@
 import CreateCountries from './CreateCountries';
+import { formatCommaToNumber } from '../helpers/util';
 
 interface Country {
   name: { common: string };
@@ -28,7 +29,7 @@ const RenderAllCountries = (countries: Country[]) => {
   countriesToShow.forEach((country, index) => {
     const flagUrl = country.flags.svg;
     const countryName = country.name.common;
-    const population = country.population;
+    const population = formatCommaToNumber(country.population);
     const region = country.region;
     const capital = country.capital ? country.capital : 'None';
 
