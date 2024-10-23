@@ -1,6 +1,12 @@
 import RenderAllCountries, { pageState } from './RenderAllCountries';
 import { fetchCountriesByRegion } from '../api/fetchCountries';
-import { setIsFilteredByRegion, setCurrentCountries, getCurrentCountries } from '../helpers/util';
+import {
+  setCurrentCountries,
+  getCurrentCountries,
+  closeDropdown,
+  enableDarkMode,
+  disableDarkMode,
+} from '../helpers/util';
 
 interface Country {
   name: { common: string };
@@ -68,7 +74,6 @@ export const filterCountriesByRegion = () => {
 
       if (region) {
         pageState.currentPage = 1;
-        // setIsFilteredByRegion(true);
 
         const countries = await fetchCountriesByRegion(region);
 
@@ -79,7 +84,40 @@ export const filterCountriesByRegion = () => {
         }
       }
 
-      dropdownMenu.classList.remove('open');
+      closeDropdown();
+    }
+  });
+};
+
+export const handleDropdownClick = () => {
+  document.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const dropdown = document.querySelector('.dropdown-menu');
+    const dropdownSelect = document.querySelector('.dropdown-select');
+    if (dropdown && dropdownSelect && !dropdown.contains(target) && !dropdownSelect.contains(target)) {
+      closeDropdown();
+    }
+  });
+};
+
+export const setupThemeSwitch = () => {
+  let darkmode = localStorage.getItem('darkmode');
+  const switchTheme = document.querySelector('.switch-theme');
+  const theme = <HTMLSpanElement>document.querySelector('.theme');
+
+  if (darkmode === 'active') {
+    enableDarkMode();
+    theme.textContent = 'DARK';
+  }
+
+  switchTheme?.addEventListener('click', () => {
+    darkmode = localStorage.getItem('darkmode');
+    if (darkmode !== 'active') {
+      enableDarkMode();
+      theme.textContent = 'DARK';
+    } else {
+      disableDarkMode();
+      theme.textContent = 'LIGHT';
     }
   });
 };
