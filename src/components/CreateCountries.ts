@@ -1,7 +1,7 @@
 const CreateCountries = (
   flagUrl: string,
   name: string,
-  population: number,
+  population: string,
   region: string,
   capital: string,
   index: number,
