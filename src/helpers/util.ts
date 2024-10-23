@@ -6,16 +6,7 @@ interface Country {
   flags: { svg: string };
 }
 
-let isFilteredByRegion = false;
 let currentCountries: Country[] = [];
-
-export const setIsFilteredByRegion = (value: boolean) => {
-  isFilteredByRegion = value;
-};
-
-export const getIsFilteredByRegion = () => {
-  return isFilteredByRegion;
-};
 
 export const setCurrentCountries = (countries: Country[]) => {
   currentCountries = countries;
@@ -33,4 +24,35 @@ export const randomizeArray = (arr: []) => {
   }
 
   return arr;
+};
+
+export const formatCommaToNumber = (value: number) => {
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
+export const applySkeletonLoader = () => {
+  const homeCountriesWrapper = <HTMLDivElement>document.querySelector('.home-countries-wrapper');
+  homeCountriesWrapper.innerHTML = '';
+
+  for (let i = 0; i < 15; i++) {
+    const skeletonGrid = document.createElement('div');
+    skeletonGrid.classList.add('skeleton');
+
+    homeCountriesWrapper.appendChild(skeletonGrid);
+  }
+};
+
+export const closeDropdown = () => {
+  const dropdownMenu = <HTMLUListElement>document.querySelector('.dropdown-menu');
+  dropdownMenu.classList.remove('open');
+};
+
+export const enableDarkMode = () => {
+  document.body.classList.add('darkmode');
+  localStorage.setItem('darkmode', 'active');
+};
+
+export const disableDarkMode = () => {
+  document.body.classList.remove('darkmode');
+  localStorage.setItem('darkmode', 'inactive');
 };
