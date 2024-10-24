@@ -1,5 +1,6 @@
 import RenderAllCountries, { pageState } from './RenderAllCountries';
 import { fetchCountriesByRegion } from '../api/fetchCountries';
+import { Country } from '../interface/countryInterface';
 import {
   setCurrentCountries,
   getCurrentCountries,
@@ -7,14 +8,6 @@ import {
   enableDarkMode,
   disableDarkMode,
 } from '../helpers/util';
-
-interface Country {
-  name: { common: string };
-  capital: string;
-  region: string;
-  population: number;
-  flags: { svg: string };
-}
 
 export const handlePagination = (countries: Country[]) => {
   let prevButton = <HTMLButtonElement>document.querySelector('.previous-button');
