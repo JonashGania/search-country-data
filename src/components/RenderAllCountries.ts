@@ -1,13 +1,6 @@
 import CreateCountries from './CreateCountries';
 import { formatCommaToNumber } from '../helpers/util';
-
-interface Country {
-  name: { common: string };
-  capital: string;
-  region: string;
-  population: number;
-  flags: { svg: string };
-}
+import { Country } from '../interface/countryInterface';
 
 export const pageState = {
   currentPage: 1,
