@@ -1,10 +1,5 @@
-interface Country {
-  name: { common: string };
-  capital: string;
-  region: string;
-  population: number;
-  flags: { svg: string };
-}
+import { Country, Currency, NativeName } from '../interface/countryInterface';
+import { whereAlpha3 } from 'iso-3166-1';
 
 let currentCountries: Country[] = [];
 
@@ -55,4 +50,60 @@ export const enableDarkMode = () => {
 export const disableDarkMode = () => {
   document.body.classList.remove('darkmode');
   localStorage.setItem('darkmode', 'inactive');
+};
+
+export const getCountryDetails = (
+  nativeName: { [languageCode: string]: NativeName } | undefined,
+  capital: string[] | undefined,
+  tld: string[],
+  currencies: { [currencyCode: string]: Currency } | undefined,
+  languages: { [languageCode: string]: string } | undefined,
+) => {
+  let countryNativeName = 'N/A';
+  let countryCurrency = 'N/A';
+  let countryCapital = 'N/A';
+  let countryLanguages = 'N/A';
+
+  const countryTld = tld.length > 1 ? tld.join(', ') : tld[0];
+
+  if (currencies) {
+    const currencyValue = Object.values(currencies);
+    if (currencyValue.length > 0) {
+      countryCurrency = currencyValue[0].name;
+    }
+  }
+
+  if (capital) {
+    countryCapital = capital.length > 1 ? capital.join(', ') : capital[0];
+  }
+
+  if (languages) {
+    countryLanguages = Object.values(languages).join(', ');
+  }
+
+  if (nativeName) {
+    const languageCodes = Object.keys(nativeName);
+    if (languageCodes.length === 1 && languageCodes[0] === 'eng') {
+      countryNativeName = nativeName['eng'].common;
+    } else if (languageCodes.length > 1 && languageCodes[0] === 'eng') {
+      countryNativeName = nativeName[languageCodes[1]].common;
+    } else {
+      countryNativeName = nativeName[languageCodes[0]].common;
+    }
+  }
+
+  return { countryNativeName, countryCapital, countryTld, countryCurrency, countryLanguages };
+};
+
+export const formatCountryCodes = (countryCodes: string[] | undefined) => {
+  if (countryCodes) {
+    const officialName = countryCodes
+      .map((code) => {
+        const country = whereAlpha3(code);
+        return country?.country || 'Unknown';
+      })
+      .filter((name): name is string => name !== undefined);
+
+    return officialName;
+  }
 };
