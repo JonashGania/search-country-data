@@ -320,11 +320,13 @@ nav{
 .more-details-container{
     display: flex;
     width: 100%;
+    gap: 2rem;
 }
 
 .more-details-container div {
     width: 50%;
 }
+
 
 .details-name{
     font-size: 2rem;
@@ -338,6 +340,8 @@ nav{
     color: var(--VeryDarkBlue);
     padding-bottom: 0.5rem;
 }
+
+
 
 .details-native-name, 
 .details-region, 
