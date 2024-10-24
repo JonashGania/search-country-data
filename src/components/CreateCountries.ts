@@ -24,6 +24,10 @@ const CreateCountries = (
     countryElement.classList.add('fade-animation');
   }, index * 70);
 
+  countryElement.addEventListener('click', () => {
+    // navigate to country specific page
+  })
+
   return countryElement;
 };
 
