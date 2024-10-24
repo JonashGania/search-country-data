@@ -1,14 +1,7 @@
 import { randomizeArray } from '../helpers/util';
+import { Country, CountryDetails } from '../interface/countryInterface';
 
-interface Countries {
-  name: { common: string };
-  capital: string;
-  region: string;
-  population: number;
-  flags: { svg: string };
-}
-
-export async function fetchAllCountries(): Promise<Countries[] | undefined> {
+export async function fetchAllCountries(): Promise<Country[] | undefined> {
   let countries = [];
 
   try {
@@ -27,7 +20,7 @@ export async function fetchAllCountries(): Promise<Countries[] | undefined> {
   }
 }
 
-export async function fetchCountriesByRegion(region: string): Promise<Countries[] | undefined> {
+export async function fetchCountriesByRegion(region: string): Promise<Country[] | undefined> {
   try {
     const response = await fetch(`https://restcountries.com/v3.1/region/${region}`);
     if (!response.ok) {
@@ -36,6 +29,21 @@ export async function fetchCountriesByRegion(region: string): Promise<Countries[
     const result = await response.json();
 
     return result;
+  } catch (error) {
+    console.error('Failed to fetch countries', error);
+  }
+}
+
+export async function fetchCountriesDetails(countryName: string): Promise<CountryDetails | undefined> {
+  try {
+    const formattedEndpoint = countryName.split(' ').join('%20');
+
+    const response = await fetch(`https://restcountries.com/v3.1/name/${formattedEndpoint}`);
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
+    }
+    const result = await response.json();
+    return result[0];
   } catch (error) {
     console.error('Failed to fetch countries', error);
   }
