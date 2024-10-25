@@ -31,6 +31,10 @@ const RenderAllCountries = (countries: Country[]) => {
   });
 
   pageNumber.textContent = `${pageState.currentPage}`;
+  const home = document.querySelector('.home');
+  const countryDetails = document.querySelector('.country-details');
+  home?.classList.remove('hidden');
+  countryDetails?.classList.add('hidden');
 };
 
 export default RenderAllCountries;
