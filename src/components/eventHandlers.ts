@@ -1,5 +1,6 @@
 import RenderAllCountries, { pageState } from './RenderAllCountries';
-import { fetchCountriesByRegion } from '../api/fetchCountries';
+import CountryDetails from './CountryDetails';
+import { fetchCountriesByRegion, fetchCountriesDetails } from '../api/fetchCountries';
 import { Country } from '../interface/countryInterface';
 import {
   setCurrentCountries,
@@ -7,6 +8,7 @@ import {
   closeDropdown,
   enableDarkMode,
   disableDarkMode,
+  applyDetailsPageSkeleton,
 } from '../helpers/util';
 
 export const handlePagination = (countries: Country[]) => {
@@ -114,3 +116,22 @@ export const setupThemeSwitch = () => {
     }
   });
 };
+
+export async function navigateToCountryDetails(countryName: string) {
+  const home = document.querySelector('.home') as HTMLElement;
+  const countryDetails = document.querySelector('.country-details') as HTMLElement;
+  home.classList.add('hidden');
+  countryDetails?.classList.remove('hidden');
+
+  countryDetails.innerHTML = '';
+
+  applyDetailsPageSkeleton();
+
+  const response = await fetchCountriesDetails(countryName);
+
+  if (response) {
+    setTimeout(() => {
+      CountryDetails(response);
+    }, 1000);
+  }
+}
