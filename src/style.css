@@ -301,15 +301,20 @@ nav{
     align-items: center;
     width: 100%;
     gap: 5rem;
-    padding-top: 3rem;
+    padding-top: 5rem;
 }
 
-.details-right-container, .details-left-container {
+.details-right-container {
+    width: 50%;
+}
+
+.details-left-container{
     width: 50%;
 }
 
 .details-left-container img{
     width: 100%;
+    max-height: 450px;
 }
 
 .back-button span{
@@ -330,13 +335,14 @@ nav{
 
 .details-name{
     font-size: 2rem;
-    font-weight: 900;
+    font-weight: 800;
     padding-bottom: 1.5rem;
+    color: var(--VeryDarkBlueText);
 }
 
 .more-details-container h4{
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--VeryDarkBlue);
     padding-bottom: 0.5rem;
 }
@@ -364,9 +370,10 @@ nav{
 
 .country-borders-wrapper span{
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--VeryDarkBlue);
     width: 22%;
+    padding-top: 0.2rem;
 }
 
 .country-border-lists {
@@ -375,6 +382,64 @@ nav{
     flex: 1;
     flex-wrap: wrap;
 }
+
+.country-border-lists li{
+    background-color: transparent;
+    padding: 0.2rem 1rem;
+    color: var(--VeryDarkBlueText);
+    font-size: 0.9rem;
+    box-shadow: none;
+}
+
+.map-content{
+    width: 100%;
+    padding: 5rem 0;
+}
+
+#map{
+    height: 100vh;
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.countries-grid.skeleton{
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+}
+
+.button.skeleton{
+    height: 40px;
+    width: 100px;
+    margin-top: 3rem;
+}
+
+.skeleton-container.skeleton{
+    width: 50%;
+    height: 400px;
+}
+.text-big.skeleton{
+    width: 250px;
+    height: 50px;
+    margin-bottom: 3rem;
+}
+.text-small.skeleton{
+    width: 250px;
+    height: 30px;
+    margin-bottom: 0.5rem;
+}
+.text-borders.skeleton{
+    height: 25px;
+    width: 100px;
+}
+
+.text-xs.skeleton{
+    margin-left: 0.5rem;
+    height: 25px;
+    width: 80px;
+}
+
 
 .skeleton {
     background-color: #a8a8a8;
@@ -388,9 +453,6 @@ nav{
     background-position: left -40px top 0;
     animation: shine 1s ease infinite;
     -webkit-animation: shine 1s ease infinite;
-    width: 100%;
-    height: 250px;
-    border-radius: 10px;
 }
   
 .sun-icon{
@@ -474,6 +536,42 @@ nav{
 
 .darkmode .previous-button:hover, .darkmode .next-button:hover{
     background-color: rgba(138, 138, 138, 0.3);
+}
+
+.darkmode .back-button{
+    background-color: var(--DarkBlue);
+    box-shadow: 0px 0px 5px 5px rgba(32, 32, 32, 0.6);
+}
+
+.darkmode .back-button span{
+    color: var(--White);
+    font-weight: 300;
+}
+
+.darkmode .details-name, .darkmode .more-details-container h4, .darkmode .country-borders-wrapper span{
+    color: var(--White);
+}
+
+
+.darkmode .details-native-name, 
+.darkmode .details-region, 
+.darkmode .details-capital, 
+.darkmode .details-population, 
+.darkmode .details-subregion, 
+.darkmode .details-level-domain, 
+.darkmode .details-currencies, 
+.darkmode .details-languages{
+    color: #cecece
+}
+
+.darkmode .country-border-lists li{
+    background-color: var(--DarkBlue);
+    color: #cecece;
+    box-shadow: 0px 0px 5px 2px rgba(32, 32, 32, 0.3);
+}
+
+.hidden{
+    display: none;
 }
 
 @keyframes shine {
