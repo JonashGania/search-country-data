@@ -31,10 +31,44 @@ export const applySkeletonLoader = () => {
 
   for (let i = 0; i < 15; i++) {
     const skeletonGrid = document.createElement('div');
-    skeletonGrid.classList.add('skeleton');
+    skeletonGrid.classList.add('countries-grid', 'skeleton');
 
     homeCountriesWrapper.appendChild(skeletonGrid);
   }
+};
+
+export const applyDetailsPageSkeleton = () => {
+  const countryDetails = document.querySelector('.country-details') as HTMLElement;
+  countryDetails.innerHTML = `
+    <div class="button skeleton"></div>
+      <div class="country-details-container">
+        <div class="skeleton-container skeleton"></div>
+        <div class="details-right-container">
+            <div class="text-big skeleton"></div>
+            <div class="more-details-container">
+                <div>
+                    <div class="text-small skeleton"></div>
+                    <div class="text-small skeleton"></div>
+                    <div class="text-small skeleton"></div>
+                    <div class="text-small skeleton"></div>
+                    <div class="text-small skeleton"></div>
+                </div>
+                <div>
+                    <div class="text-small skeleton"></div>
+                    <div class="text-small skeleton"></div>
+                    <div class="text-small skeleton"></div>
+                </div>
+            </div>
+            <div class="country-borders-wrapper">
+                <div class="text-borders skeleton"></div>
+                <div class="text-xs skeleton"></div>
+                <div class="text-xs skeleton"></div>
+                <div class="text-xs skeleton"></div>
+                <div class="text-xs skeleton"></div>
+            </div>
+        </div>
+    </div>
+  `;
 };
 
 export const closeDropdown = () => {
