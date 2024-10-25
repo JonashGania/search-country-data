@@ -1,3 +1,5 @@
+import { navigateToCountryDetails } from './eventHandlers';
+
 const CreateCountries = (
   flagUrl: string,
   name: string,
@@ -25,8 +27,8 @@ const CreateCountries = (
   }, index * 70);
 
   countryElement.addEventListener('click', () => {
-    // navigate to country specific page
-  })
+    navigateToCountryDetails(name);
+  });
 
   return countryElement;
 };
