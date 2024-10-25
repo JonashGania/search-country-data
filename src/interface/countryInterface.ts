@@ -22,6 +22,7 @@ export interface CountryDetails {
   subregion: string;
   capital?: string[];
   tld: string[];
+  cca3: string;
   flags: { svg: string; alt: string };
   currencies?: {
     [currencyCode: string]: Currency;
