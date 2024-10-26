@@ -36,6 +36,7 @@ export interface CountryDetails {
 export interface Country {
   name: { common: string };
   capital: string;
+  cca3: string;
   region: string;
   population: number;
   flags: { svg: string };
