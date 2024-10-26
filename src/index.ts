@@ -7,6 +7,8 @@ import {
   filterCountriesByRegion,
   setupThemeSwitch,
   handleDropdownClick,
+  handleSearchCountries,
+  handleNavigateHome,
 } from './components/eventHandlers';
 
 async function initialize(): Promise<void> {
@@ -31,4 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initialize();
   setupThemeSwitch();
   handleDropdownClick();
+  handleSearchCountries();
+  handleNavigateHome(initialize);
 });
