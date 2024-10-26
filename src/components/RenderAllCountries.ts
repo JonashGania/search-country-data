@@ -25,8 +25,9 @@ const RenderAllCountries = (countries: Country[]) => {
     const population = formatCommaToNumber(country.population);
     const region = country.region;
     const capital = country.capital ? country.capital : 'None';
+    const cca3 = country.cca3;
 
-    const countryElement = CreateCountries(flagUrl, countryName, population, region, capital, index);
+    const countryElement = CreateCountries(flagUrl, countryName, cca3, population, region, capital, index);
     countriesWrapper.appendChild(countryElement);
   });
 
