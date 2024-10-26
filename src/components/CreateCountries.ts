@@ -3,6 +3,7 @@ import { navigateToCountryDetails } from './eventHandlers';
 const CreateCountries = (
   flagUrl: string,
   name: string,
+  cca3: string,
   population: string,
   region: string,
   capital: string,
@@ -27,7 +28,7 @@ const CreateCountries = (
   }, index * 70);
 
   countryElement.addEventListener('click', () => {
-    navigateToCountryDetails(name);
+    navigateToCountryDetails(cca3);
   });
 
   return countryElement;
