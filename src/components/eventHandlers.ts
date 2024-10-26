@@ -1,6 +1,6 @@
 import RenderAllCountries, { pageState } from './RenderAllCountries';
 import CountryDetails from './CountryDetails';
-import { fetchCountriesByRegion, fetchCountriesDetails } from '../api/fetchCountries';
+import { fetchCountriesByRegion, fetchCountriesDetails, searchCountryDetails } from '../api/fetchCountries';
 import { Country } from '../interface/countryInterface';
 import {
   setCurrentCountries,
@@ -84,6 +84,18 @@ export const filterCountriesByRegion = () => {
   });
 };
 
+export const handleSearchCountries = () => {
+  const searchInput = <HTMLInputElement>document.querySelector('.search-country-input');
+  const searchButton = <HTMLButtonElement>document.querySelector('.search-button');
+
+  searchButton.addEventListener('click', searchCountryDetails);
+  searchInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      searchCountryDetails();
+    }
+  });
+};
+
 export const handleDropdownClick = () => {
   document.addEventListener('click', (e: MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -117,7 +129,7 @@ export const setupThemeSwitch = () => {
   });
 };
 
-export async function navigateToCountryDetails(countryName: string) {
+export async function navigateToCountryDetails(countryCode: string) {
   const home = document.querySelector('.home') as HTMLElement;
   const countryDetails = document.querySelector('.country-details') as HTMLElement;
   home.classList.add('hidden');
@@ -127,7 +139,7 @@ export async function navigateToCountryDetails(countryName: string) {
 
   applyDetailsPageSkeleton();
 
-  const response = await fetchCountriesDetails(countryName);
+  const response = await fetchCountriesDetails(countryCode);
 
   if (response) {
     setTimeout(() => {
@@ -135,3 +147,11 @@ export async function navigateToCountryDetails(countryName: string) {
     }, 1000);
   }
 }
+
+export const handleNavigateHome = (initialize: () => Promise<void>) => {
+  const logo = document.querySelector('.logo');
+
+  if (logo) {
+    logo.addEventListener('click', initialize);
+  }
+};
