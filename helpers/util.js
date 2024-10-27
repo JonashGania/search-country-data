@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.formatCountryCodes = exports.getCountryDetails = exports.disableDarkMode = exports.enableDarkMode = exports.closeDropdown = exports.applySkeletonLoader = exports.formatCommaToNumber = exports.randomizeArray = exports.getCurrentCountries = exports.setCurrentCountries = void 0;
+exports.formatCountryCodes = exports.getCountryDetails = exports.disableDarkMode = exports.enableDarkMode = exports.closeDropdown = exports.applyDetailsPageSkeleton = exports.applySkeletonLoader = exports.formatCommaToNumber = exports.randomizeArray = exports.getCurrentCountries = exports.setCurrentCountries = void 0;
 const iso_3166_1_1 = require("iso-3166-1");
 let currentCountries = [];
 const setCurrentCountries = (countries) => {
@@ -28,11 +28,45 @@ const applySkeletonLoader = () => {
     homeCountriesWrapper.innerHTML = '';
     for (let i = 0; i < 15; i++) {
         const skeletonGrid = document.createElement('div');
-        skeletonGrid.classList.add('skeleton');
+        skeletonGrid.classList.add('countries-grid', 'skeleton');
         homeCountriesWrapper.appendChild(skeletonGrid);
     }
 };
 exports.applySkeletonLoader = applySkeletonLoader;
+const applyDetailsPageSkeleton = () => {
+    const countryDetails = document.querySelector('.country-details');
+    countryDetails.innerHTML = `
+    <div class="button skeleton"></div>
+      <div class="country-details-container">
+        <div class="skeleton-container skeleton"></div>
+        <div class="details-right-container">
+            <div class="text-big skeleton"></div>
+            <div class="more-details-container">
+                <div>
+                    <div class="text-small skeleton"></div>
+                    <div class="text-small skeleton"></div>
+                    <div class="text-small skeleton"></div>
+                    <div class="text-small skeleton"></div>
+                    <div class="text-small skeleton"></div>
+                </div>
+                <div>
+                    <div class="text-small skeleton"></div>
+                    <div class="text-small skeleton"></div>
+                    <div class="text-small skeleton"></div>
+                </div>
+            </div>
+            <div class="country-borders-wrapper">
+                <div class="text-borders skeleton"></div>
+                <div class="text-xs skeleton"></div>
+                <div class="text-xs skeleton"></div>
+                <div class="text-xs skeleton"></div>
+                <div class="text-xs skeleton"></div>
+            </div>
+        </div>
+    </div>
+  `;
+};
+exports.applyDetailsPageSkeleton = applyDetailsPageSkeleton;
 const closeDropdown = () => {
     const dropdownMenu = document.querySelector('.dropdown-menu');
     dropdownMenu.classList.remove('open');
@@ -49,14 +83,22 @@ const disableDarkMode = () => {
 };
 exports.disableDarkMode = disableDarkMode;
 const getCountryDetails = (nativeName, capital, tld, currencies, languages) => {
-    let countryNativeName;
-    let countryCurrency;
-    const countryCapital = capital.length > 1 ? capital.join(', ') : capital[0];
+    let countryNativeName = 'N/A';
+    let countryCurrency = 'N/A';
+    let countryCapital = 'N/A';
+    let countryLanguages = 'N/A';
     const countryTld = tld.length > 1 ? tld.join(', ') : tld[0];
-    const countryLanguages = Object.values(languages).join(', ');
-    const currencyValue = Object.values(currencies);
-    if (currencyValue.length > 0) {
-        countryCurrency = currencyValue[0].name;
+    if (currencies) {
+        const currencyValue = Object.values(currencies);
+        if (currencyValue.length > 0) {
+            countryCurrency = currencyValue[0].name;
+        }
+    }
+    if (capital) {
+        countryCapital = capital.length > 1 ? capital.join(', ') : capital[0];
+    }
+    if (languages) {
+        countryLanguages = Object.values(languages).join(', ');
     }
     if (nativeName) {
         const languageCodes = Object.keys(nativeName);
@@ -69,9 +111,6 @@ const getCountryDetails = (nativeName, capital, tld, currencies, languages) => {
         else {
             countryNativeName = nativeName[languageCodes[0]].common;
         }
-    }
-    else {
-        countryNativeName = 'None';
     }
     return { countryNativeName, countryCapital, countryTld, countryCurrency, countryLanguages };
 };

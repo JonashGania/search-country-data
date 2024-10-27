@@ -31,9 +31,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setupThemeSwitch = exports.handleDropdownClick = exports.filterCountriesByRegion = exports.handlePagination = void 0;
+exports.handleNavigateHome = exports.setupThemeSwitch = exports.handleDropdownClick = exports.handleSearchCountries = exports.filterCountriesByRegion = exports.handlePagination = void 0;
+exports.navigateToCountryDetails = navigateToCountryDetails;
 const RenderAllCountries_1 = __importStar(require("./RenderAllCountries"));
+const CountryDetails_1 = __importDefault(require("./CountryDetails"));
 const fetchCountries_1 = require("../api/fetchCountries");
 const util_1 = require("../helpers/util");
 const handlePagination = (countries) => {
@@ -73,8 +78,10 @@ const filterCountriesByRegion = () => {
     const dropdown = document.querySelector('.dropdown-select');
     const dropdownMenu = document.querySelector('.dropdown-menu');
     const selectedRegion = document.querySelector('.selected');
+    selectedRegion.textContent = 'Filter by Region';
     dropdown.addEventListener('click', () => {
         dropdownMenu.classList.toggle('open');
+        console.log('clicked');
     });
     dropdownMenu.addEventListener('click', (e) => __awaiter(void 0, void 0, void 0, function* () {
         const target = e.target;
@@ -95,6 +102,17 @@ const filterCountriesByRegion = () => {
     }));
 };
 exports.filterCountriesByRegion = filterCountriesByRegion;
+const handleSearchCountries = () => {
+    const searchInput = document.querySelector('.search-country-input');
+    const searchButton = document.querySelector('.search-button');
+    searchButton.addEventListener('click', fetchCountries_1.searchCountryDetails);
+    searchInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            (0, fetchCountries_1.searchCountryDetails)();
+        }
+    });
+};
+exports.handleSearchCountries = handleSearchCountries;
 const handleDropdownClick = () => {
     document.addEventListener('click', (e) => {
         const target = e.target;
@@ -127,3 +145,26 @@ const setupThemeSwitch = () => {
     });
 };
 exports.setupThemeSwitch = setupThemeSwitch;
+function navigateToCountryDetails(countryCode) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const home = document.querySelector('.home');
+        const countryDetails = document.querySelector('.country-details');
+        home.classList.add('hidden');
+        countryDetails === null || countryDetails === void 0 ? void 0 : countryDetails.classList.remove('hidden');
+        countryDetails.innerHTML = '';
+        (0, util_1.applyDetailsPageSkeleton)();
+        const response = yield (0, fetchCountries_1.fetchCountriesDetails)(countryCode);
+        if (response) {
+            setTimeout(() => {
+                (0, CountryDetails_1.default)(response);
+            }, 1000);
+        }
+    });
+}
+const handleNavigateHome = (initialize) => {
+    const logo = document.querySelector('.logo');
+    if (logo) {
+        logo.addEventListener('click', initialize);
+    }
+};
+exports.handleNavigateHome = handleNavigateHome;
