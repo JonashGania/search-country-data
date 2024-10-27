@@ -24,7 +24,6 @@ async function initialize(): Promise<void> {
       handlePagination(getCurrentCountries());
       RenderAllCountries(getCurrentCountries());
 
-      filterCountriesByRegion();
     }, 1500);
   }
 }
@@ -34,5 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupThemeSwitch();
   handleDropdownClick();
   handleSearchCountries();
+  filterCountriesByRegion();
   handleNavigateHome(initialize);
 });
