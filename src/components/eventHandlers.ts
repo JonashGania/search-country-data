@@ -55,8 +55,11 @@ export const filterCountriesByRegion = () => {
   const dropdownMenu = <HTMLUListElement>document.querySelector('.dropdown-menu');
   const selectedRegion = <HTMLSpanElement>document.querySelector('.selected');
 
+  selectedRegion.textContent = 'Filter by Region';
+
   dropdown.addEventListener('click', () => {
     dropdownMenu.classList.toggle('open');
+    console.log('clicked');
   });
 
   dropdownMenu.addEventListener('click', async (e) => {
