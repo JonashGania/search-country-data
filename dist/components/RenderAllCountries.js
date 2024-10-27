@@ -25,9 +25,14 @@ const RenderAllCountries = (countries) => {
         const population = (0, util_1.formatCommaToNumber)(country.population);
         const region = country.region;
         const capital = country.capital ? country.capital : 'None';
-        const countryElement = (0, CreateCountries_1.default)(flagUrl, countryName, population, region, capital, index);
+        const cca3 = country.cca3;
+        const countryElement = (0, CreateCountries_1.default)(flagUrl, countryName, cca3, population, region, capital, index);
         countriesWrapper.appendChild(countryElement);
     });
     pageNumber.textContent = `${exports.pageState.currentPage}`;
+    const home = document.querySelector('.home');
+    const countryDetails = document.querySelector('.country-details');
+    home === null || home === void 0 ? void 0 : home.classList.remove('hidden');
+    countryDetails === null || countryDetails === void 0 ? void 0 : countryDetails.classList.add('hidden');
 };
 exports.default = RenderAllCountries;

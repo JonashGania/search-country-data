@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const CreateCountries = (flagUrl, name, population, region, capital, index) => {
+const eventHandlers_1 = require("./eventHandlers");
+const CreateCountries = (flagUrl, name, cca3, population, region, capital, index) => {
     const countryElement = document.createElement('div');
     countryElement.classList.add('country');
     countryElement.setAttribute('data-country-index', `${index}`);
@@ -16,6 +17,9 @@ const CreateCountries = (flagUrl, name, population, region, capital, index) => {
     setTimeout(() => {
         countryElement.classList.add('fade-animation');
     }, index * 70);
+    countryElement.addEventListener('click', () => {
+        (0, eventHandlers_1.navigateToCountryDetails)(cca3);
+    });
     return countryElement;
 };
 exports.default = CreateCountries;
