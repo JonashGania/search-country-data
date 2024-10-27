@@ -50,7 +50,7 @@ function initMap(countryCode, mapContainer) {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         }).addTo(map);
         try {
-            const response = yield fetch(`/geojson/${countryCode}.json`);
+            const response = yield fetch(`../geojson/${countryCode}.json`);
             if (!response.ok)
                 throw new Error('GeoJSON file not found');
             const geoJsonData = yield response.json();
