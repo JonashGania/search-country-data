@@ -45,7 +45,7 @@ async function initMap(countryCode: string, mapContainer: HTMLDivElement) {
   }).addTo(map);
 
   try {
-    const response = await fetch(`/geojson/${countryCode}.json`);
+    const response = await fetch(`../../geojson/${countryCode}.json`);
     if (!response.ok) throw new Error('GeoJSON file not found');
 
     const geoJsonData = await response.json();
