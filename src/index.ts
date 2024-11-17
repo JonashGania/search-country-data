@@ -10,6 +10,7 @@ import {
   handleSearchCountries,
   handleNavigateHome,
 } from './components/eventHandlers';
+import { whereAlpha3 } from 'iso-3166-1';
 
 async function initialize(): Promise<void> {
   const countries = await fetchAllCountries();
