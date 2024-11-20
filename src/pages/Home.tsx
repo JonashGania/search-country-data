@@ -95,6 +95,7 @@ const Home = () => {
                 <PaginationContent>
                     <PaginationItem>
                         <PaginationPrevious 
+                            data-testid="previous-button"
                             className={`${startIndex === 0 ? 'pointer-events-none opacity-60' : ''} text-lg font-medium cursor-pointer border border-transparent hover:border-gray-300 dark:hover:border-transparent dark:text-gray-100`} 
                             onClick={handlePrevious}
                         />
@@ -104,6 +105,7 @@ const Home = () => {
                 <PaginationContent>
                     <PaginationItem>
                         <PaginationNext 
+                            data-testid="next-button"
                             className={`${endIndex >= countries.length ? 'pointer-events-none opacity-60' : ''} text-lg font-medium cursor-pointer border border-transparent hover:border-gray-300 dark:hover:border-transparent dark:text-gray-100`} 
                             onClick={handleNext}
                         />
