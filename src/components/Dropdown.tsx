@@ -45,20 +45,25 @@ const Dropdown = ({ onRegionChange }: DropdownProps) => {
                     <img src="/chevron-down.svg" alt="chevron down icon" />
                 </div>
             </button>
-            <div className={`${selectShow ? 'block' : 'hidden'} absolute right-0 bg-white dark:bg-black z-20 w-full px-2 rounded-md mt-2 border border-gray-200 dark:border-zinc-700 shadow-lg`}>
-                <ul className="py-1">
-                    {regions.map((region, index) => (
-                        <li 
-                            value={region}
-                            key={index}
-                            onClick={() => handleRegionSelect(region)}
-                            className={`text-gray-800 dark:text-gray-100 px-3 py-1 text-sm cursor-pointer hover:bg-neutral-200 dark:hover:bg-[rgba(229,229,229,0.2)] rounded-sm`}
-                        >
-                            {region}
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            {selectShow && (
+                <div 
+                    className={`absolute right-0 bg-white dark:bg-black z-20 w-full px-2 rounded-md mt-2 border border-gray-200 dark:border-zinc-700 shadow-lg`}
+                >
+                    <ul className="py-1">
+                        {regions.map((region, index) => (
+                            <li 
+                                value={region}
+                                key={index}
+                                onClick={() => handleRegionSelect(region)}
+                                className={`text-gray-800 dark:text-gray-100 px-3 py-1 text-sm cursor-pointer hover:bg-neutral-200 dark:hover:bg-[rgba(229,229,229,0.2)] rounded-sm`}
+                            >
+                                {region}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+  
         </div>
     )
 }
