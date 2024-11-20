@@ -37,6 +37,7 @@ const Searchbar = () => {
             <input 
                 type="text"
                 value={searchValue}
+                data-testid="searchbar"
                 onChange={(e) => setSearchValue(e.target.value)}
                 onKeyDown={handleKeyDown} 
                 className="w-full outline-none border-none text-zinc-500 dark:text-gray-100 bg-transparent placeholder:text-gray-500 dark:placeholder:text-zinc-500" 
